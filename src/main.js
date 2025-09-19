@@ -13,6 +13,9 @@ import Aura from '@primevue/themes/aura'
 // import DataTable from 'primevue/datatable'
 // import Column from 'primevue/Column'
 
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/js/bootstrap.bundle.min.js"   
+
 
 
 

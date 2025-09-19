@@ -1,54 +1,61 @@
 <template>
-  <!-- Using Bootstrap's Header template (starter code) -->
-  <!-- https://getbootstrap.com/docs/5.0/examples/headers/ -->
-  <div class="container">
-    <header class="d-flex justify-content-center py-3">
-      <ul class="nav nav-pills">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
+    <router-link to="/" class="navbar-brand">Library App</router-link>
+
+    
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+   
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <router-link to="/" class="nav-link" active-class="active" aria-current="page"
-            >Home (Week 5)</router-link
-          >
+          <router-link to="/" class="nav-link" active-class="active">Home (Week 5)</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/FireRegister" class="nav-link" active-class="active">Firebase Register</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
+        </li>
       </ul>
-    </header>
-  </div>
+      <div>
+        <button v-if="isAuthenticated" class="btn btn-outline-danger" @click="logout">
+          Logout
+        </button>
+        <router-link v-else to="/FireLogin" class="btn btn-outline-primary">
+          Login
+        </router-link>
+      </div>
+    </div>
+  </nav>
 </template>
-<style scoped>
-.b-example-divider {
-  height: 3rem;
-  background-color: rgba(0, 0, 0, 0.1);
-  border: solid rgba(0, 0, 0, 0.15);
-  border-width: 1px 0;
-  box-shadow:
-    inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
-    inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
-}
 
-.form-control-dark {
-  color: #fff;
-  background-color: var(--bs-dark);
-  border-color: var(--bs-gray);
-}
-.form-control-dark:focus {
-  color: #fff;
-  background-color: var(--bs-dark);
-  border-color: #fff;
-  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
-}
+<script setup>
+import { isAuthenticated, currentUser } from "../store/auth"
+import { getAuth, signOut } from "firebase/auth"
+import { useRouter } from "vue-router"
 
-.bi {
-  vertical-align: -0.125em;
-  fill: currentColor;
-}
+const auth = getAuth()
+const router = useRouter()
 
-.text-small {
-  font-size: 85%;
+const logout = () => {
+  signOut(auth).then(() => {
+    isAuthenticated.value = false
+    currentUser.value = null
+    router.push("/FireLogin")
+  })
 }
-
-.dropdown-toggle {
-  outline: 0;
-}
-</style>
+</script>
