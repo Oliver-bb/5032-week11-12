@@ -1,45 +1,37 @@
-<script setup>
-import JSONLab from './components/JSONLab.vue'
-import BHeader from './components/BHeader.vue'
-import LibraryRegistrationForm from './components/LibraryRegistrationForm.vue'
-</script>
-
 <template>
-  <header>
-    <BHeader />
-  </header>
-
-  <main>
-    <LibraryRegistrationForm />
-    <!-- <JSONLab /> -->
-  </main>
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
+      <router-link to="/" class="navbar-brand">Library App</router-link>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <router-link to="/" class="nav-link">Home (Week 5)</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/about" class="nav-link">About</router-link>
+          </li>
+        </ul>
+        <div>
+          <button v-if="isAuthenticated" class="btn btn-outline-danger" @click="logout">
+            Logout
+          </button>
+          <router-link v-else to="/login" class="btn btn-outline-primary">
+            Login
+          </router-link>
+        </div>
+      </div>
+    </nav>
+    <router-view />
+  </div>
 </template>
 
-<style scoped>
-/* header {
-  line-height: 1.5;
+<script setup>
+import { isAuthenticated } from './store/auth'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const logout = () => {
+  isAuthenticated.value = false
+  router.push('/login')
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-} */
-</style>
+</script>

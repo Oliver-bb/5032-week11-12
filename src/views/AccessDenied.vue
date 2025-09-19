@@ -1,0 +1,7 @@
+<template>
+  <div class="container mt-5 text-center">
+    <h1>Access Denied 🚫</h1>
+    <p>You must log in to view this page.</p>
+    <router-link to="/login" class="btn btn-primary">Go to Login</router-link>
+  </div>
+</template>
