@@ -5,7 +5,11 @@ import FirebaseSigninView from "../views/FirebaseSigninView.vue"
 import FirebaseRegisterView from "../views/FirebaseRegisterView.vue"
 import { isAuthenticated } from "../store/auth"
 import AddBookView from "../views/AddBookView.vue"
+import AddBookAPIView from "../views/AddBookView.vue"
 import BookList from "../components/BookList.vue" 
+import GetBookCountView from "@/views/GetBookCountView.vue" 
+import WeatherView from "@/views/WeatherView.vue"
+import CountBookAPI from "@/views/CountBookAPI.vue"
 
 
 const routes = [
@@ -14,7 +18,12 @@ const routes = [
   { path: "/FireRegister", name: "FireRegister", component: FirebaseRegisterView },
   { path: "/about", name: "about", component: AboutView, meta: { requiresAuth: true } },
   { path: "/addbook", name: "AddBook", component: AddBookView },
+  { path: "/addbookAPI", name: "AddBookAPI", component: AddBookAPIView },
   { path: "/booklist", name: "BookList", component: BookList },
+  { path: "/GetBookCount", name: "GetBookCount", component: GetBookCountView},
+  { path: "/Weather", name: "Weather", component: WeatherView},
+  { path: "/CountBookAPI", name: "CountBookAPI", component: CountBookAPI},
+  { path: "/GetAllBookAPI", name: "GetAllBookAPI", component: GetAllBookAPI}
 ]
 
 const router = createRouter({
